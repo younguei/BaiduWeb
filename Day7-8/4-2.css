@@ -1,0 +1,19 @@
+/*flex 布局*/
+.container{
+	display: flex;
+}
+.main{
+	flex:1;
+	height:60%;
+	order:2;
+}
+.right{
+	flex:0 0 100px;
+	height:30%;
+	order:3;
+}
+.left{
+	flex:0 0 200px;
+	height:30%;
+	order:1;
+}

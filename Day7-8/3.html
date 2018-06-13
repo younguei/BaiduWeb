@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>两栏布局，右栏固定宽度，左栏自适应宽度</title>
+	<style type="text/css" media="screen">
+		html,body{
+			padding:0;
+			margin:0;
+			height:80%;
+		}
+		.container{
+			width:80%;
+			height:100%;
+			border:1px solid #ccc;
+			margin:0 auto;
+			margin-top:10px;
+		}
+		.container::after{
+			content:"";
+			display:block;
+			clear:both;
+		}
+		.right{
+			height:40%;
+			background:#ccc;
+		}
+		.left{
+			height:60%;
+			background:#2866bd;
+		}
+		
+		.btn{
+			width:80%;
+			margin:0 auto;
+			text-align: center;
+		}
+
+		#active{
+			background:orange;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="./3-3.css" id="style-sheet">
+	<script src="./3changestyle.js" type="text/javascript"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="right">
+			右侧固定宽度为200px
+		</div>
+		<div class="left">
+			左侧自适应宽度
+		</div>
+
+	</div>
+	<div class="btn">
+		<button type="" class="button" id="active">flex布局</button>
+		<button type="" class="button">绝对定位布局</button>
+		<button type="" class="button">float布局</button>
+		<button type="" class="button">flex布局</button>
+	</div>
+</body>
+</html>

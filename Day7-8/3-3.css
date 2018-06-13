@@ -1,0 +1,13 @@
+/*float布局*/
+.left{
+	height:20%;
+	margin-right: 200px;
+}
+.right{
+	float:right;
+	width:200px;
+	height:80%;
+}
+.container::after{
+	content:'注意：在用浮动效果实现时，要把right写在left之前，因为right浮动后，left可以占据其空间	但是先写left，后写right，right浮动后，对前面的left不会产生影响，也不会覆盖在right上';
+}

@@ -1,0 +1,15 @@
+/*绝对定位布局*/
+.container{
+	position: relative;
+}
+.right{
+	width:200px;
+	height:30%;
+	position: absolute;
+	right:0;
+	top:0;
+}
+.left{
+	height:70%;
+	margin-right: 200px;
+}

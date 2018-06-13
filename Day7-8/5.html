@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>三栏布局,左侧和中间固定宽度，右侧自适应</title>
+	<style type="text/css" media="screen">
+		html,body{
+			padding:0;
+			margin:0;
+			height:80%;
+		}
+		.container{
+			width:80%;
+			height:100%;
+			border:1px solid #ccc;
+			margin:0 auto;
+			margin-top:10px;
+		}
+		.container::after{
+			content:"";
+			display:block;
+			clear:both;
+		}
+		.main{
+			height:60%;
+			background:#ccc;
+		}
+		.left{
+			height:20%;
+			background:orange;
+		}
+		.right{
+			height:40%;
+			background:pink;
+		}
+
+		/*flex布局*/
+		.container{
+			display: flex;
+		}
+		.main{
+			flex:0 0 400px;
+			order:2;
+		}
+		.left{
+			flex:0 0 200px;
+			order:1;
+		}
+		.right{
+			flex:1;
+			order:3;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="main">
+			中间固定400px
+		</div>
+		<div class="left">
+			左侧固定宽度为200px
+		</div>
+		<div class="right">
+			右侧自适应
+		</div>
+	</div>
+</body>
+</html>

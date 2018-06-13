@@ -1,0 +1,10 @@
+/*float布局*/
+.left,.right{
+	float:left;
+}
+.left{
+	width:30%;
+}
+.right{
+	width:70%;
+}

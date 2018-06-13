@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>几种布局</title>
+	<style type="text/css" media="screen">
+		html,body{
+			width:100%;
+			height:100%;
+			margin:0;
+			padding:0;
+		}
+		ul,li{
+			padding:0;
+			margin:0;
+		}
+		.container{
+			width:80%;
+			height:100%;
+			margin:0 auto;
+		}
+
+		.header{
+			height:40px;
+			background:#000;
+			color:#fff;
+		}
+		.header .container span{
+			display: inline-block;
+			line-height: 40px;
+		}
+		.header .container span.links{
+			float:right;
+		}
+		.header .container span.links a{
+			margin-left: 10px;
+		}
+		.header .container a{
+			color:#fff;
+			text-decoration: none;
+		}
+
+		.banner{
+			height:250px;
+			background:rgba(0,255,0,.2);
+		}
+		.banner .container{
+			position: relative;
+		}
+		.banner .tag{
+			position: absolute;
+			right:0;
+			bottom:5px;
+		}
+		.banner .tag span{
+			display: inline-block;
+			height:20px;
+			width:20px;
+			text-align: center;
+			border-radius: 50%;
+			border:1px solid #ccc;
+			background:#fff;
+		}
+		
+		.content .tabs{
+			height:50px;
+			border-bottom: 1px solid #ccc;
+
+		}
+		.content .container{
+			position: relative;
+		}
+		.content .container ul{
+			overflow:hidden;
+			position:absolute;
+			bottom:0;
+		}
+		.content .container li{
+			float:left;
+			list-style: none;
+			padding:10px;
+			border:1px solid #ccc;
+			border-bottom: none;
+			border-top-right-radius: 10px; 
+			border-top-left-radius: 10px; 
+		}
+		.content .show{
+			/*height:400px;*/
+			overflow: auto;
+		}
+		.content .show .container{
+			/*background:blue;*/
+			text-align: center;
+		}
+		.content .show .container .row1{
+			width:100%;
+			height:200px;
+			display: flex;
+		}
+		.content .show .container .row2{
+			width:100%;
+			height:200px;
+			display: flex;
+		}
+		.content .show .container .row1 div{
+			flex:1;
+			flex:300px;
+			border:1px solid #ccc;
+			margin:5px;
+			padding:80px;
+		}
+		.content .show .container .row2 div{
+			flex:1;
+			flex:150px;
+			border:1px solid #ccc;
+			margin:5px;
+			padding:80px;
+		}
+		.footer{
+			height:50px;
+			font-size: 15px;
+			line-height: 50px;
+			background-color: rgba(0,0,0,.5);
+			color:#fff;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div class="header">
+		<div class="container">
+			<span><a href="" target="_blank">Rainbow's Notes</a></span>
+			<span class="links"><a href="">Github</a> <a href="">Register</a> <a href="">Login</a></span>
+		</div>
+	</div>
+	<div class="banner">
+		<div class="container">
+			<div class="show">
+				
+			</div>
+			<div class="tag">
+				<span>1</span>
+				<span>2</span>
+				<span>3</span>
+				<span>4</span>
+			</div>
+		</div>
+	</div>
+	<div class="content">
+		<div class="tabs">
+			<div class="container">
+				<ul>
+					<li>HOME</li>
+					<li>PROFILE</li>
+					<li>ABOUT</li>
+				</ul>
+			</div>
+		</div>
+		<div class="show">
+			<div class="container">
+				<div class="row1">
+					<div><a href="">两栏布局左侧30% 右侧70%宽度</a></div>
+					<div><a href="">两栏布局左侧固定宽度 右侧自适应</a></div>
+					<div><a href="">两栏布局右侧固定宽度 左侧自适应</a></div>
+				</div>
+				<div class="row2">
+					<div><a href="">三栏布局左侧固定宽度 右侧固定宽度 中间自适应</a></div>
+					<div><a href="">三栏布局 左侧固定宽度 中间固定宽度 右侧自适应</a></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		&copy;2018 ife.baidu.com
+	</div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+/*Flex布局*/
+.container{
+	display:flex;
+}
+.left{
+	flex:0 0 200px;
+}
+.right{
+	flex:1;
+}

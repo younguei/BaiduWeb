@@ -1,0 +1,12 @@
+/*Flex布局*/
+.container{
+	display:flex;
+}
+.right{
+	flex:7;
+	height:40%;
+}
+.left{
+	flex:3;
+	height:20%;
+}

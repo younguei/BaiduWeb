@@ -1,0 +1,11 @@
+/*浮动布局*/
+.left{
+	width:200px;
+	height:60%;
+	float:left;
+}
+.right{
+	 /*不能给该区域设置宽度 不设置宽度 它会自动占据满剩余的父空间*/
+	margin-left:200px; 
+	height:10%;
+}
