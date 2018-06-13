@@ -6,3 +6,6 @@
 [简单布局](https://younguei.github.io/BaiduWeb/Day5/Day5.1.html)
 [flex布局1](https://younguei.github.io/BaiduWeb/Day5/Day5.2.html)
 [flex布局2](https://younguei.github.io/BaiduWeb/Day5/Day5.3.html)
+
+### Day7-8
+[几种布局效果](https://younguei.github.io/BaiduWeb/Day7-8/Day7_8.html)
