@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css" media="screen"></style>
+</head>
+<body>
+ <div id="panel">
+   <select id="year-select"></select>
+
+   <select id="month-select"></select>
+
+   <select id="day-select"></select>
+
+   <select id="hour-select"></select>
+
+   <select id="minute-select"></select>
+
+   <select id="second-select"></select>
+ </div>
+
+  <p id="result-wrapper"></p>
+  <script type="text/javascript">
+    var panel = document.querySelector("#panel");
+
+    var year_select = document.querySelector("#year-select");
+    var month_select= document.querySelector("#month-select");
+    var day_select = document.querySelector("#day-select");
+    var hour_select = document.querySelector("#hour-select");
+    var minute_select = document.querySelector("#minute-select");
+    var second_select = document.querySelector("#second-select");
+    var timer = null;
+
+
+    // 初始化
+    initializeSelect();
+    
+    // 添加事件
+    panel.onchange = function(){
+      rationalityCheck();
+    }
+    timer = setInterval("document.querySelector('#result-wrapper').innerText = calculateDate()",500)
+
+
+    // 初始化各种选项
+    function addOption(parentNode,start,end){
+      start = Number(start);
+      end = Number(end);
+      if((typeof start) !== "number" || (typeof end) !== "number"){console.log("wrond");return false;};
+      for(var i=start;i<=end;i++){
+        var item = document.createElement("option");
+        item.value = i;
+        item.textContent = i;
+        parentNode.appendChild(item);
+        
+      }
+    }
+
+    function rationalityCheck() {
+           // 初始化 29，30，31 日显示样式
+           day_select[28].style = "";
+           day_select[29].style = "";
+           day_select[30].style = "";
+           var month_without_31_days = [2, 4, 6, 9, 11];
+           for (x in month_without_31_days) {
+               if (month_select.value == month_without_31_days[x]) {
+                   day_select[30].style.display = "none";
+                   console.log(day_select[30])
+                   console.log("here")
+                   break;
+               }
+           }
+           if (month_select.value == 2) {
+               day_select[29].style.display = "none";
+               if (year_select.value % 4 != 0 || (year_select.value % 100 == 0 && year_select.value % 400 != 0)) {
+                   day_select[28].style.display = "none";
+               }
+           }
+       }
+    function initializeSelect(){
+      addOption(year_select,2000,2030);
+      addOption(month_select,1,12);
+      addOption(day_select,1,31);
+      addOption(hour_select,0,23);
+      addOption(minute_select,0,59);
+      addOption(second_select,0,59);
+    }
+   
+
+    // 将剩余时间格式化
+    function formatTimeMs(time_ms){
+      const SECOND = 1000;
+      const MINUTE = SECOND * 60;
+      const HOUR = MINUTE * 60;
+      const DAY = HOUR * 24;
+      var days = Math.floor(time_ms / DAY);
+      var hours = Math.floor(time_ms % DAY / HOUR);
+      var minutes = Math.floor(time_ms % DAY % HOUR / MINUTE);
+      var seconds = Math.floor(time_ms % DAY % HOUR % MINUTE / SECOND);
+
+      return (days+"天" + hours + "小时" + minutes + "分" + seconds + "秒")
+    }
+
+    // 选中的时间
+    function formatFullDate(full_time){
+      var year = full_time.getFullYear();
+      var month = full_time.getMonth()+1;
+      var date = full_time.getDate();
+      var day = full_time.getDay();
+      var hh = formatTime(full_time.getHours());
+      var mm = formatTime(full_time.getMinutes());
+      var ss = formatTime(full_time.getSeconds());
+
+      var weekDay = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+
+      return(year+"年" + month + "月" + date + "日" + weekDay[day]+ " "  + hh +":"  + mm +":"  + ss )
+    }
+
+    function formatTime(num){
+      if(typeof num !== 'number') return false;
+      if(num < 10){
+        num = "0" + num;
+      }
+      return num;
+    }
+
+    function calculateDate(){
+      var year = year_select.value;
+      var month = month_select.value;
+      var date = day_select.value;
+      var hour = hour_select.value;
+      var minute = minute_select.value;
+      var second = second_select.value;
+
+      var selected_date = new Date(year,(month-1),date,hour,minute,second);
+      var now_date = new Date();
+
+      var date_differ = selected_date - now_date;
+
+      if(date_differ > 0){
+        differ_status = "还有";
+      }else{
+        differ_status = "已经过去";
+        date_differ = Math.abs(date_differ);
+      }
+
+      var selected_date_formatted = formatFullDate(selected_date);
+      var date_differ_formatted = formatTimeMs(date_differ);
+
+      // console.log(selected_date_formatted);
+      // console.log(date_differ_formatted);
+
+      // console.log("现在距离：" + selected_date_formatted + differ_status + date_differ_formatted);
+      return ("现在距离：" + selected_date_formatted + differ_status + date_differ_formatted);
+    }
+   </script>
+</body>
+</html>
