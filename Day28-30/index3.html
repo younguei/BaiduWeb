@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css" media="screen">
+		.wrapper{
+			box-sizing: border-box;
+			width:200px;
+			height:300px;
+			font-size: 10px;
+		}
+		.wrapper input{
+			box-sizing: border-box;
+			width:100%;
+			height:30px;
+			font-size: 10px;
+			border:1px solid #3079ed;
+			line-height:30px;
+			padding: 5px 10px;
+		}
+		.wrapper ul{
+			display: none;
+			box-sizing: border-box;
+			border:1px solid #3079ed;
+			border-top: none;
+			list-style: none;
+			font-size: 10px;
+			padding:0;
+			width:100%;
+			/*padding:5px 10px;*/
+			margin:0;
+			color:rgba(0,0,0,.4);
+		}
+		.wrapper li{
+			width:100%;
+			padding:5px 10px;
+			box-sizing: border-box;
+		}
+		.wrapper li:hover{
+			background:#ccc;
+			cursor: pointer;
+		}
+		.choose{
+			background: #2866bd;
+			color:#fff;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+	    <input id="email-input" type="text">
+	    <ul id="email-sug-wrapper" class="email-sug"></ul>
+	</div>
+	<script type="text/javascript">
+		var text_input = document.querySelector("#email-input");
+		var ulItem = document.querySelector("#email-sug-wrapper");
+		var postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
+
+		// 记录当前高亮的li
+		var index = 0;
+
+		text_input.oninput = function(event){
+			// 获取输入内容 并去除前后空格后显示到输入框内
+			var userName = text_input.value;
+			userName = myTrim(userName);
+			text_input.value = userName;
+
+			var textObj =  filterInputValue(text_input.value);
+			initializeItem(textObj);
+		}
+		text_input.onkeyup = function(event){
+			var itemArr = document.querySelectorAll("li");
+			switch (event.keyCode){
+				case 38:
+					console.log("up");
+					index = index -1;
+					if(index < 0){
+						index = itemArr.length - 1;
+
+					}
+					break;
+				case 40:
+					console.log("down");
+					++index;
+					if(index >= itemArr.length ){
+						index = 0;
+					}
+					break;	
+				case 13:
+					if(itemArr[index].innerText != ""){text_input.value = itemArr[index].innerText;}
+					ulItem.style.display = "none"
+					break;	
+				default: 
+					index = 0;			
+			}
+			for(var item in itemArr){
+				itemArr[item].className = "";
+			}
+			if(itemArr.length !== 1){
+				itemArr[index].className = "choose";
+			}else{
+				itemArr[0].className = "choose"
+			}
+
+			var itemArr = [];
+		}
+
+		function filterInputValue(text){
+			var index = text.indexOf("@");
+			var textString,tagString;
+			if( index !== -1){
+				textString = text.slice(0,index);
+				tagString = text.slice(index+1);
+				//  返回一个对象
+				return {textString,tagString};
+			}
+			textString = text;
+			return {textString};			
+			
+		}
+
+		function filterItem(text){
+			//  当输入字符串后进行筛选，全部不符合则返回原数组
+			var newArr = [];
+			newArr = postfixList.filter(element => element.slice(0,text.length) === text);
+			if(newArr.length == 0){
+				newArr = postfixList;
+			}
+			return newArr;
+		}
+
+		function myTrim(text){
+			var len = text.length;
+			for(var i=0;i<len;i++){
+				if(text.charAt(0) === " "){
+					text = text.slice(1);
+				}else{
+					break;
+				}
+			}
+			for(var i=0;i<len;i++){
+				if(text.charAt(text.length-1) === " "){
+					text = text.slice(0,text.length-1);
+				}else{
+					break;
+				}
+			}
+			return text;
+		}
+		
+		function initializeItem(textObj){
+			ulItem.innerHTML = "";
+			ulItem.style.display = "block";
+			var newArr = [];
+			if(textObj.tagString){
+				newArr = filterItem(textObj.tagString);
+			}else{
+				newArr = postfixList;
+			}
+			for( var i in newArr){
+				var item = document.createElement("li");
+				item.innerText = textObj.textString + "@" + newArr[i];
+				ulItem.appendChild(item);
+			}
+			checkItem();
+
+			// 为li添加点击事件
+			itemMethod()
+			
+		}
+		function itemMethod(){
+			var liArr = document.querySelectorAll("li");
+			for(var i=0;i<liArr.length;i++){
+				liArr[i].onclick = function(event){
+					var text = event.target.innerText;
+					text_input.value = text;
+					ulItem.style.display = "none";
+				};
+			}
+		}
+		function checkItem(){
+			if(text_input.value === ""){
+				ulItem.style.display = "none";
+			}
+		}
+	</script>
+</body>
+</html>
